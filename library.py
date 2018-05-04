@@ -1,6 +1,9 @@
 #!/bin/env python
 
+import os
 import sqlite3
+from ID3 import *
+
 dbfile = '/home/richkent/Workspace/Python/library.db'
 conn = sqlite3.connect(dbfile)
 
@@ -27,7 +30,24 @@ def showtracks():
 
 def inputlibrary():
     print "Input Library"
-    
+
+def populatelibrary():
+    response = raw_input("Enter mp3 root folder: ")
+    tree = os.walk(response)
+    try:
+        (a, arts, a) = tree.next()
+        for artist in arts:
+            print "New artist ", artist
+            (a, albs, a) = tree.next()
+            for album in albs:
+                print "   New album ", album
+                (a, a, trks) = tree.next()
+                for track in trks:
+                    print "      New track ", track
+            
+    except StopIteration:
+        print "Iteration stopped"
+
 def mainmenu():
     done = False
     while not done:
@@ -35,6 +55,7 @@ def mainmenu():
         print "2) Show an artist's albums"
         print "3) Show an album's tracks"
         print "4) Input library info"
+        print "5) Populate library based on mp3s"
         print ""
         print "0) Quit"
         print ""
@@ -47,6 +68,8 @@ def mainmenu():
             showtracks()
         elif response == 4:
             inputlibrary()
+        elif response == 5:
+            populatelibrary()
         elif response == 0:
             done = True
         else:
