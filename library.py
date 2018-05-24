@@ -4,7 +4,7 @@ import os
 import sqlite3
 from ID3 import *
 
-dbfile = '/home/richkent/Workspace/Python/library.db'
+dbfile = './library.db'
 conn = sqlite3.connect(dbfile)
 
 def selectAlbum(artistID):
@@ -33,17 +33,26 @@ def inputlibrary():
 
 def populatelibrary():
     response = raw_input("Enter mp3 root folder: ")
+    print "Walking: \"",response,"\""
     tree = os.walk(response)
     try:
         (a, arts, a) = tree.next()
         for artist in arts:
             print "New artist ", artist
-            (a, albs, a) = tree.next()
-            for album in albs:
-                print "   New album ", album
-                (a, a, trks) = tree.next()
-                for track in trks:
-                    print "      New track ", track
+            artname = raw_input("Enter artist name (def: {0}, skip, quit):".format(artist))
+            if artname == "":
+                artname = artist
+            elif artname == "quit":
+                break
+            elif artname == "skip":
+                continue
+            artfolder=response + os.sep + artist
+            # (a, albs, a) = tree.next()
+            # for album in albs:
+                # print "   New album ", album
+                # (a, a, trks) = tree.next()
+                # for track in trks:
+                    # print "      New track ", track
             
     except StopIteration:
         print "Iteration stopped"
