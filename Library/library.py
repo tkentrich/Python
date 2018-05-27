@@ -4,7 +4,7 @@ import os
 import sqlite3
 from ID3 import *
 
-dbfile = './library.db'
+dbfile = './music.db'
 conn = sqlite3.connect(dbfile)
 
 def selectAlbum(artistID):
