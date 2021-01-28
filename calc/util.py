@@ -15,7 +15,16 @@ def bam(data, highrange, bitlength):
       result += diff
     diff *= 0.5
   return result * multiplier
-  
+
+def bamatch(pbam, sol):
+  if sol >= 2 ** len(pbam):
+    return False
+  bsol = bin(sol)[2:].zfill(len(pbam))[0:len(pbam)]
+  for i,c in enumerate(pbam):
+    if c in ['0','1'] and c != bsol[i]:
+      return False
+  return True
+
 def parse(data):
   dict = {}
   (dict['direction'], unsigned int
