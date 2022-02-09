@@ -44,10 +44,16 @@ def parse(data):
   return dict
 
 def main():
+  # Demonstrate parsing data from random byte stream
   data = [random.randint(0,255) for x in range(19)]
   d = parse(bytes(data))
   for k in d:
     print("%s: %s"%(k, d[k]))
+
+  # Demonstrate effect of bits on BAM
+  moredata = sorted(bytes([random.randint(0,255) for x in range(10)] + [0,1,2,4,8,16,32,64,128,255]))
+  for x in moredata:
+      print("{0:02x} {0:08b} {1}".format(x,bam(x, 360, 8)))
     
 if __name__ == '__main__':
   main()
