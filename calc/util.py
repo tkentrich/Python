@@ -25,21 +25,29 @@ def bamatch(pbam, sol):
       return False
   return True
 
+def humanize(string):
+    newname=''
+    chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ-_0123456789'
+    for c in string:
+        newname += chars[c % len(chars)]
+    return newname
+
 def parse(data):
   dict = {}
-  (dict['direction'], unsigned int
-   dict['magnitude'],
+  (dict['direction'], 
+   dict['magnitude'], # unsigned int
    dict['name'],
    dict['id']
   ) = struct.unpack('<Ii10sB', data)
-  dict['field2'] = bam(dict['field2'], 360, 16)
+  dict['name'] = humanize(dict['name'])
+  dict['direction'] = bam(dict['direction'], 360, 16)
   return dict
 
 def main():
   data = [random.randint(0,255) for x in range(19)]
-  d = parse(data)
-  for k,v in d:
-    print "%s: %s"%(k, v)
+  d = parse(bytes(data))
+  for k in d:
+    print("%s: %s"%(k, d[k]))
     
 if __name__ == '__main__':
   main()
