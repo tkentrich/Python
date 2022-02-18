@@ -31,7 +31,7 @@ levelData = [
 ]
 
 def clearScreen():
-	print chr(27) + "[2J"
+	print(chr(27) + "[2J")
 
 def main(stdscr):
 	stdscr.nodelay(1)

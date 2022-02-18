@@ -187,8 +187,8 @@ class Level(object):
 	def printLevel(self):
 		for y in reversed(range(0, self.size.y)):
 			for x in range(0, self.size.x):
-				print self.getChar(XY(x, y)),
-			print
+				print(self.getChar(XY(x, y)),)
+			print()
 
 	def addObject(self, obj, pos):
 		self.objects[pos.x][pos.y].append(obj)
