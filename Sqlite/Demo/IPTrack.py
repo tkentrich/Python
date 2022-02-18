@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sqlite3
-import urllib2
+import urllib.request
 from datetime import datetime
 
 dbfile = 'database.db'
@@ -13,9 +13,8 @@ cursor = connection.cursor()
 d = datetime.now()
 
 # Get the current IP
-req = urllib2.Request('https://api.ipify.org')
-res = urllib2.urlopen(req)
-ip = res.read()
+req = urllib.request.urlopen('https://api.ipify.org')
+ip = req.read()
 
 # Input the IP into the log
 cursor.execute("INSERT INTO IP_LOG (date, ip) VALUES (?, ?)", (d, ip, ))
