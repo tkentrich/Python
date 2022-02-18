@@ -3,7 +3,7 @@
 # Obtained from http://zetcode.com/gui/tkinter/drawing/
 
 
-from Tkinter import Tk, Canvas, Frame, BOTH
+from tkinter import Tk, Canvas, Frame, BOTH
 
 class Example(Frame):
     def __init__(self):
